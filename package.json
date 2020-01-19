@@ -1,10 +1,10 @@
 {
-  "name": "x-workbench",
-  "version": "0.3.2",
+  "name": "@attrs/workbench",
+  "version": "0.4.0",
   "description": "Extensible Admin UI",
   "main": "lib/index.js",
-  "homepage": "https://attrs.github.io/x-workbench/",
-  "repository": "attrs/x-workbench",
+  "homepage": "https://attrs.github.io/workbench/",
+  "repository": "attrs/workbench",
   "author": "joje <joje.attrs@gmail.com>",
   "scripts": {
     "demo": "node node_modules/webmodules/bin/wpm.js up 8000 docs -s",
