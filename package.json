@@ -7,7 +7,6 @@
   "repository": "attrs/workbench",
   "author": "joje <joje.attrs@gmail.com>",
   "scripts": {
-    "demo": "node node_modules/webmodules/bin/wpm.js up 8000 docs -s",
     "build": "gulp build"
   },
   "license": "MIT",
@@ -48,7 +47,6 @@
     "style-loader": "^0.17.0",
     "through2": "^2.0.3",
     "url-loader": "^0.5.8",
-    "webmodules": "^0.1.46",
     "webpack": "^2.5.1"
   },
   "files": [
