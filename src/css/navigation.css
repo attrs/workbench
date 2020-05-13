@@ -2,7 +2,7 @@
   margin: 20px 0;
   font-size: 0.9em;
   
-  .xw-navigation-title {
+  & .xw-navigation-title {
     padding-left: 15px;
     line-height: 20px;
     text-transform: uppercase;
@@ -21,7 +21,7 @@
     padding: 0;
   }
   
-  a, a:hover, a:active, a:focus {
+  & a, a:hover, & a:active, & a:focus {
     text-decoration: none;
   }
 }
@@ -49,7 +49,7 @@ li.xw-navitem {
     }
     
     &:hover {
-      i {
+      & i {
         opacity: .7;
       }
     }
@@ -146,7 +146,7 @@ li.xw-navitem {
       
       // 3 depth
       & > ul.xw-navitem-items {
-        li > a {
+        & li > a {
           padding-left: 45px;
         }
       }

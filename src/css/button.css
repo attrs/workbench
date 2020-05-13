@@ -5,8 +5,8 @@
   line-height: 1.42857143;
   margin: 5px 2px;
   //overflow: hidden;
-  color: @text-color;
-  border: 1px solid @border-color;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   border-radius: 3px;
   text-align: center;
   vertical-align: middle;
@@ -33,12 +33,12 @@
   
   &:hover, &:active, &:focus {
     text-decoration: none;
-    background: @border-color;
+    background: var(--border-color);
   }
   
   &:hover {
-    i {
-      color: @text-color;
+    & i {
+      color: var(--text-color);
     }
   }
   
@@ -56,8 +56,8 @@
     border-radius: 10px;
     //background-color: transparent;
     //color: lighten(@badge-color, 10%);
-    background-color: @badge-color;
-    color: @badge-text-color;
+    background-color: var(--badge-color);
+    color: var(--badge-text-color);
     transition: opacity .35s;
     
     &:active, &:focus {
@@ -72,7 +72,7 @@
     opacity: 0.5;
     width: 12px;
     height: 12px;
-    background-image: @caret-image;
+    background-image: var(--caret-image);
     background-size: 100% 100%;
     transform: rotate(90deg);
   }
@@ -85,9 +85,9 @@
     margin: 0;
     padding: 0;
     margin-top: 8px;
-    border: 1px solid @border-color;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    background-color: @white;
+    background-color: var(--white);
     text-align: left;
     opacity: 0;
     transform: perspective(500px) rotateX(-15deg);
