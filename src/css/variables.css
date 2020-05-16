@@ -1,0 +1,31 @@
+:root {
+  --xw-white: #fff;
+  --xw-muted: #999;
+  --xw-page-bg: #eee;
+  --xw-text-color-light: #aaa;
+  --xw-brand-default: #E6E6E6;
+  --xw-brand-primary: #3498db;
+  --xw-brand-success: #70BC1F;
+  --xw-brand-info: #3bafda;
+  --xw-brand-warning: #f6bb42;
+  --xw-brand-danger: #E74D2B;
+  --xw-brand-system: #9F7BE1;
+  --xw-brand-light: #fafafa;
+  --xw-brand-dark: #3b3f4f;
+  --xw-brand-alert: #967adc;
+  --xw-brand-secondary: var(--xw-brand-danger);
+  --xw-active-color: var(--xw-brand-primary);
+  --xw-badge-color: var(--xw-brand-primary);
+  --xw-badge-text-color: white;
+  --xw-border-color: rgba(0,0,0,0.1);
+  --xw-selection-color: rgba(0,0,0,0.05);
+  --xw-shadow-color: rgba(0,0,0,0.07);
+  --xw-text-color: #3E3E3E;
+  --xw-icon-color: #4E4E4E;
+  --xw-active-color-dark: #55AAC7;
+  --xw-bg-color-dark: #2D3230;
+  --xw-bg-color-dark-2: #292826;
+  --xw-border-color-dark: rgba(255,255,255,0.07);
+  --xw-text-color-dark: #CACBCB;
+  --xw-caret-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAALZJREFUKBWlUjEOgkAQPBRjoY21HfFjNLb+xljb+w7jS+yxR2bkRgYMArrJZIe92dm7DSF8RoJSCjBPim7DfGy3Gjl1Y029Bn7AphLIgAuwBm7AE6COuTdm8WSJfAYozmONieZfwwUnKGmwtw6/qZUbumhoOIIXgBtoNyZr05V93sEfwDbW/HYmq+nPk9110pv/2ram7nD7K3CwBw1uWVukyag/zMxfVAaqD06UUJkGnN410vk7V4WsFGQSWHtEAAAAAElFTkSuQmCC');
+}

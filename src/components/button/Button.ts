@@ -13,9 +13,6 @@ export class ButtonOptions extends ContainerOptions {
 export class Button extends Container {
   constructor(options?: ButtonOptions) {
     super(options);
-    this.on('options', (e) => {
-      this.update();
-    });
   }
 
   public create() {
@@ -29,7 +26,7 @@ export class Button extends Container {
     )[0];
   }
 
-  public update(): Button {
+  public init() {
     const o = this.options() as ButtonOptions;
     const el = $(this.dom());
     const ul = $('<ul class="xw-button-items"></ul>');
@@ -58,8 +55,8 @@ export class Button extends Container {
         ul.append(view.dom(), index).appendTo(el);
       })
       .on('removeitem', (e) => {
-        ul.children().each((node) => {
-          if (e.detail?.item === node._item) $(this).remove();
+        ul.children().each((i, node) => {
+          if (e.detail?.item === node._item) $(node).remove();
         });
 
         if (!ul.children().length) {
@@ -78,7 +75,7 @@ export class Button extends Container {
       this.open(false);
     });
 
-    return this;
+    super.init();
   }
 
   public body(): DOMElement {

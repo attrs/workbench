@@ -36,13 +36,14 @@ export class View {
 
   public static create(options?: ViewOptions, alttype?: string): View {
     if (!arguments.length) return new View();
-    
+
     options = options || {};
     if (options instanceof View) return options;
-    if (options === '-') options = { type: 'seperator' };
+    if (options === '-') options = { type: 'separator' };
 
     const type = options.type || alttype;
     const Type = type ? types[type] : deftype;
+
     if (!Type) throw new Error(`view type "${options.type || alttype}" does not exist`);
     return new Type(options);
   }
@@ -55,15 +56,35 @@ export class View {
 
   private _options: ViewOptions;
   private _dom: DOMElement;
-  private _data: Properties = {};
-  private _responder: StateResponder | null = null;
+  private _data?: Properties;
+  private _responder?: StateResponder;
 
   constructor(options?: ViewOptions) {
     const o = (this._options = options || {});
     const dom = (this._dom = this.create(o));
-    const el = $(dom);
-
     $(dom).attr('id', o.id).ac('xw-view');
+    this.init();
+    if (o.hidden) this.hide();
+    this.on('options', (e) => {
+      this.update();
+    });
+  }
+
+  get id(): string {
+    return $(this.dom()).attr('id');
+  }
+
+  public options(options?: ViewOptions): View | ViewOptions {
+    if (!arguments.length) return this._options;
+    this._options = options || {};
+    this.fire('options', { options });
+    return this;
+  }
+
+  public init(): void {
+    const o = this.options() as ViewOptions;
+    const dom = this._dom;
+    const el = $(dom);
     dom.view = this;
 
     if (o.style) el.css(o.style);
@@ -98,18 +119,10 @@ export class View {
       if (name.startsWith('on')) this.on(name.substring(2), listener);
       else if (name.startsWith('$')) this.on(name.substring(1), listener);
     });
-    if (o.hidden) this.hide();
   }
 
-  get id(): string {
-    return $(this.dom()).attr('id');
-  }
-
-  public options(options?: ViewOptions): View | ViewOptions {
-    if (!arguments.length) return this._options;
-    this._options = options || {};
-    this.fire('options', { options });
-    return this;
+  public update(): void {
+    //
   }
 
   public state(state: string | string[]) {
@@ -120,7 +133,7 @@ export class View {
 
     if (!state) {
       el.rc('xw-state-responder').attr('data-state', null);
-      this._responder = null;
+      delete this._responder;
       return this;
     }
 
@@ -172,7 +185,7 @@ export class View {
     return parent && parent.view;
   }
 
-  public find(id: string | typeof View): View | null {
+  public find(id: string | View | typeof View): View | null {
     if (id instanceof View) return id;
     if (typeof id === 'string') {
       const node = this.dom().querySelector('#' + id + '.xw-view') as DOMElement;
@@ -181,7 +194,7 @@ export class View {
     return this.findall(id)[0];
   }
 
-  public findall(id: string | typeof View): View[] {
+  public findall(id: string | View | typeof View): View[] {
     const el = $(this.dom());
     let els;
     if (typeof id === 'string') els = el.find('#' + id + '.xw-view');
@@ -215,8 +228,8 @@ export class View {
 
   public workbench(): Workbench {
     return $(this.dom())
-      .parent(() => {
-        return this.workbench;
+      .parent((node) => {
+        return node.workbench;
       }, true)
       .map((p) => {
         return p && p.workbench;
@@ -224,7 +237,7 @@ export class View {
   }
 
   public data(data: AnyObject): View | Properties {
-    if (!arguments.length) return this._data;
+    if (!arguments.length) return (this._data = data || {});
     this._data = data || {};
     this.fire('data', { data });
     return this;

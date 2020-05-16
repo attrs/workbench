@@ -4,9 +4,8 @@
   padding: 6px 14px;
   line-height: 1.42857143;
   margin: 5px 2px;
-  //overflow: hidden;
-  color: @text-color;
-  border: 1px solid @border-color;
+  color: var(--xw-text-color);
+  border: 1px solid  var(--xw-border-color);
   border-radius: 3px;
   text-align: center;
   vertical-align: middle;
@@ -14,31 +13,29 @@
   
   white-space: nowrap;
   vertical-align: middle;
-  -ms-touch-action: manipulation;
   touch-action: manipulation;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   
   & > .xw-button-text {
   }
   
   & > .xw-button-icon > i {
-    color: fade(@text-color, 60%);
+    color: var(--xw-icon-color);
     width: 24px;
     text-align: center;
   }
   
   &:hover, &:active, &:focus {
     text-decoration: none;
-    background: @border-color;
+    background: var(--xw-selection-color);
   }
   
   &:hover {
-    i {
-      color: @text-color;
+    background: var(--xw-selection-color);
+
+    & i {
+      opacity: .9;
     }
   }
   
@@ -54,10 +51,8 @@
     white-space: nowrap;
     vertical-align: middle;
     border-radius: 10px;
-    //background-color: transparent;
-    //color: lighten(@badge-color, 10%);
-    background-color: @badge-color;
-    color: @badge-text-color;
+    background-color: var(--xw-badge-color);
+    color: var(--xw-badge-text-color);
     transition: opacity .35s;
     
     &:active, &:focus {
@@ -72,7 +67,7 @@
     opacity: 0.5;
     width: 12px;
     height: 12px;
-    background-image: @caret-image;
+    background-image: var(--xw-caret-image);
     background-size: 100% 100%;
     transform: rotate(90deg);
   }
@@ -85,22 +80,22 @@
     margin: 0;
     padding: 0;
     margin-top: 8px;
-    border: 1px solid @border-color;
+    border: 1px solid  var(--xw-border-color);
     border-radius: 4px;
-    background-color: @white;
+    background-color: var(--xw-white);
     text-align: left;
     opacity: 0;
     transform: perspective(500px) rotateX(-15deg);
     transform-origin: 50% -50px;
     will-change: transform, opacity;
     transition: transform .15s ease-out, opacity .25s;
-    box-shadow: -3px -3px 15px fade(@border-color, 3%);
+    box-shadow: -3px -3px 15px var(--xw-shadow-color);
     
     & > .xw-navitem {
       min-width: 200px;
       
       &:hover {
-        background-color: fade(@border-color, 5%);
+        opacity: .95;
       }
     }
     
@@ -114,7 +109,7 @@
       transform: rotate(45deg);
       border-radius: 4px 0 0 0;
       background: #fff;
-      box-shadow: -2px -2px 5px fade(@border-color, 3%);
+      box-shadow: -2px -2px 5px var(--xw-shadow-color);
       will-change: transform;
       content: '';
     }

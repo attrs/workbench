@@ -2,12 +2,9 @@ import $ from 'tinyselector';
 import { View, ViewOptions, ContainerOptions, Container, DOMElement } from '../../base';
 
 export class TabbedOptions extends ContainerOptions {
-  public icon?: string;
-  public text?: string;
-  public link?: string;
-  public target?: string;
-  public badge?: string;
-  public ddalign?: string;
+  public oneline?: boolean;
+  public icononly?: boolean;
+  public titleonly?: boolean;
 }
 
 export class Tabbed extends Container {
@@ -24,7 +21,8 @@ export class Tabbed extends Container {
     </div>')[0];
   }
 
-  public init(o) {
+  public init() {
+    const o = this.options() as TabbedOptions;
     const el = $(this.dom());
 
     this.oneline(o.oneline);
@@ -38,29 +36,30 @@ export class Tabbed extends Container {
       el.append(view.dom());
       this.validate();
     }).on('removeitem', (e) => {
-      el.children().each((node) => {
-        if (e.detail?.item === node._item) $(this).remove();
+      el.children().each((i, node) => {
+        if (e.detail?.item === node._item) $(node).remove();
       });
 
       this.validate();
     });
 
+    super.init();
     el.attr('flexbox', null);
   }
 
-  public oneline(b: boolean): Tabbed | boolean {
+  public oneline(b?: boolean): Tabbed | boolean {
     if (!arguments.length) return $(this.dom()).hc('xw-tab-oneline');
     $(this.dom()).tc('xw-tab-oneline', b);
     return this;
   }
 
-  public icononly(b: boolean): Tabbed | boolean {
+  public icononly(b?: boolean): Tabbed | boolean {
     if (!arguments.length) return $(this.dom()).hc('xw-tab-icon-only');
     $(this.dom()).tc('xw-tab-icon-only', b);
     return this;
   }
 
-  public titleonly(b: boolean): Tabbed | boolean {
+  public titleonly(b?: boolean): Tabbed | boolean {
     if (!arguments.length) return $(this.dom()).hc('xw-tab-title-only');
     $(this.dom()).tc('xw-tab-title-only', b);
     return this;
@@ -126,7 +125,7 @@ export class Tabbed extends Container {
 
     const body = this.body();
     const children = body.children;
-    if (typeof id === 'number') return children[id] && (children[id] as DOMElement).view || null;
+    if (typeof id === 'number') return (children[id] && (children[id] as DOMElement).view) || null;
     if (typeof id !== 'string') return null;
 
     return $(body)

@@ -12,7 +12,7 @@ export class WorkbenchOptions {
 const presets = {};
 const perspectives = {};
 let currentperspective;
-let currentperspecticearg = [];
+let currentperspecticearg: any[] = [];
 
 export class Workbench {
   public static preset(name: string, preset: AnyObject): typeof Workbench | string {
@@ -31,7 +31,7 @@ export class Workbench {
 
     if (o.preset) {
       const preset = presets[o.preset];
-      if (!preset) throw new Error('preset');
+      if (!preset) throw new Error(`preset "${o.preset}" does not exist`);
       this._view = View.create(preset.view);
     } else {
       this._view = View.create();
@@ -91,9 +91,8 @@ export class Workbench {
     return this;
   }
 
-  public switch(id) {
+  public switch(id, ...arg) {
     const perspective = perspectives[id];
-    const arg = [].slice.call(arguments, 1);
     if (!perspective) throw new Error('not found perspective: ' + id);
     if (currentperspective === perspective && equals(arg, currentperspecticearg)) return this;
 

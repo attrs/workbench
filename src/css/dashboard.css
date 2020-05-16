@@ -20,7 +20,7 @@
 }
 
 .xw-dashboard-topbar {
-  border-bottom: 1px solid @border-color;
+  border-bottom: 1px solid var(--xw-border-color);
   height: 60px;
   transition: all 0.2s ease;
   
@@ -36,27 +36,27 @@
     float: right
   }
   
-  .xw-logo {
+  & .xw-logo {
     position: relative;
     overflow: hidden;
     width: 250px;
     height: 60px;
     box-sizing: border-box;
     
-    color: @text-color;
+    color: var(--xw-text-color);
     line-height: 60px;
     padding: 0;
     padding-left: 15px;
     font-size: 17px;
     letter-spacing: 0.5px;
     
-    a {
+    & a {
       line-height: 58px;
       color: inherit;
     }
   }
   
-  .xw-nav {
+  & .xw-nav {
     padding: 0;
     margin: 0;
     
@@ -64,7 +64,7 @@
       margin-left: 0;
       
       & > a {
-        color: @text-color;
+        color: var(--xw-text-color);
         font-size: 12px;
         font-weight: 600;
         padding: 0 15px;
@@ -74,7 +74,7 @@
     }
   }
   
-  .xw-form-group {
+  & .xw-form-group {
     margin: 0;
     padding: 0;
     line-height: 56px;
@@ -89,11 +89,11 @@
       padding: 0 12px;
       transition: all 0.2s ease;
       border-radius: 19px;
-      border-color: @border-color;
+      border-color: var(--xw-border-color);
       
       font-size: 12px;
       line-height: 1.5em;
-      color: @text-color;
+      color: var(--xw-text-color);
       border: 1px solid #dddddd;
       
       &:focus {
@@ -105,11 +105,11 @@
     }
   }
   
-  a, a:hover, a:active, a:focus {
+  & a, & a:hover, & a:active, & a:focus {
     text-decoration: none;
   }
   
-  .xw-toolbar > .xw-button {
+  & .xw-toolbar > .xw-button {
     line-height: 60px;
     margin: 0;
     padding: 0 15px;
@@ -117,46 +117,42 @@
     border: 0;
     
     & > .xw-button-text {
-      color: fade(@text-color, 90%);
-    }
-    
-    &:hover, &:active, &:focus {
-      background: fade(@border-color, 2%);
+      color: var(--xw-text-color);
     }
     
     &:hover > .xw-button-icon > i {
-      color: fade(@active-color, 100%);
+      color: var(--xw-active-color);
     }
   }
 }
 
-.xw-dashboard-footer {
-  color: @text-color-light;
+& .xw-dashboard-footer {
+  color: var(--xw-text-color-light);
   font-size: 13px;
   overflow: hidden;
   padding: 10px 0px;
   background-color: #fafafa;
-  border-top: 1px solid @border-color;
+  border-top: 1px solid var(--xw-border-color);
   
-  b {
-    color: darken(@text-color-light, 10%);
+  & b {
+    color: var(--xw-text-color-light);
   }
   
   & > .row {
     margin: 0;
   }
   
-  .icon {
+  & .icon {
     margin-left: 7px;
     display: inline-block;
-    color: @text-color-light;
+    color: var(--xw-text-color-light);
     padding: 3px 7px;
     background-color: #eaeaea;
     border-radius: 3px;
     transition: all 0.25s ease;
     
     &:hover {
-      color: @text-color;
+      color: var(--xw-text-color);
     }
   }
 }

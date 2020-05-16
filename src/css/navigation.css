@@ -2,7 +2,7 @@
   margin: 20px 0;
   font-size: 0.9em;
   
-  .xw-navigation-title {
+  & .xw-navigation-title {
     padding-left: 15px;
     line-height: 20px;
     text-transform: uppercase;
@@ -13,15 +13,13 @@
   }
     
   & > ul.xw-navigation-items {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     list-style: none;
     margin: 0;
     padding: 0;
   }
   
-  a, a:hover, a:active, a:focus {
+  & a, & a:hover, & a:active, & a:focus {
     text-decoration: none;
   }
 }
@@ -49,7 +47,8 @@ li.xw-navitem {
     }
     
     &:hover {
-      i {
+      background: var(--xw-selection-color);
+      & i {
         opacity: .7;
       }
     }
@@ -63,7 +62,7 @@ li.xw-navitem {
       display: inline-block;
       line-height: 1em;
       font-size: 1em;
-      color: lighten(@text-color, 5%);
+      color: var(--xw-text-color);
       width: 27px;
       text-align: center;
     }
@@ -81,7 +80,7 @@ li.xw-navitem {
         opacity: 0.8;
         width: 12px;
         height: 12px;
-        background-image: @caret-image;
+        background-image: var(--xw-caret-image);
         background-size: 100% 100%;
         transition: transform .25s;
       }
@@ -97,11 +96,8 @@ li.xw-navitem {
         white-space: nowrap;
         vertical-align: middle;
         border-radius: 10px;
-        //background-color: transparent;
-        //color: lighten(@badge-color, 10%);
-        //border: 2px solid @badge-color;
-        background-color: @badge-color;
-        color: @badge-text-color;
+        background-color: var(--xw-badge-color);
+        color: var(--xw-badge-text-color);
         opacity: 0;
         transition: opacity .35s;
         
@@ -118,7 +114,7 @@ li.xw-navitem {
   
   &.xw-navitem-active {
     & > a > .xw-navitem-icon > i {
-      color: @active-color;
+      color: var(--xw-active-color);
     }
   }
   
@@ -140,13 +136,13 @@ li.xw-navitem {
       
       &.xw-navitem-active {
         & > a > .xw-navitem-icon > i {
-          color: lighten(@active-color, 10%);
+          color: var(--xw-active-color);
         }
       }
       
       // 3 depth
       & > ul.xw-navitem-items {
-        li > a {
+        & li > a {
           padding-left: 45px;
         }
       }

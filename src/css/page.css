@@ -1,9 +1,9 @@
 .xw-page {
   position: relative;
-  background-color: @page-bg;
+  background-color: var(--xw-page-bg);
   overflow: auto;
   
-  .xw-table-layout {
+  & .xw-table-layout {
     flex: 1;
     display: flex;
     flex-flow: row;
@@ -14,7 +14,7 @@
       width: 0;
     }
     
-    .xw-tray {
+    & .xw-tray {
       transition: all 0.25s ease;
       
       &.xw-tray-center {
@@ -26,16 +26,16 @@
         width: 280px;
         max-width: 280px;
         order: 100;
-        background-color: lighten(@page-bg, 3%);
-        border-left: 1px solid @border-color;
+        background-color: var(--xw-page-bg);
+        border-left: 1px solid var(--xw-border-color);
       }
       
       &.xw-tray-left {
         width: 280px;
         max-width: 280px;
         order: -100;
-        background-color: lighten(@page-bg, 3%);
-        border-right: 1px solid @border-color;
+        background-color: var(--xw-page-bg);
+        border-right: 1px solid var(--xw-border-color);
       }
     }
   }

@@ -2,25 +2,26 @@ import $ from 'tinyselector';
 
 const wrap = (type) => {
   const ofn = history[type];
-  return (...arg) => {
-    const result = ofn.apply(ofn, arg);
-    
+  return function (state, title, href) {
+    // @ts-ignore
+    const result = ofn.apply(this, arguments);
+
     findandfire({
       type: type.toLowerCase(),
-      state: arg[0],
-      href: arg[1]
+      state,
+      href
     });
     return result;
   };
 };
 
 const findandfire = (detail) => {
-  $('.xw-state-responder').each((node) => {
-    if( !node.view ) return;
+  $('.xw-state-responder').each((i, node) => {
+    if (!node.view) return;
     const view = node.view;
     const responder = view.state();
-    
-    if( typeof responder === 'function' && responder(detail) ) {
+
+    if (typeof responder === 'function' && responder(detail)) {
       view.fire('matchstate', detail);
     }
   });

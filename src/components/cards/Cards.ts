@@ -8,23 +8,25 @@ export class Cards extends Container {
 
   constructor(options: CardOptions) {
     super(options);
+  }
 
+  public init() {
     const el = $(this.dom());
 
-    this
-      .on('additem', (e) => {
-        const item = e.detail?.item;
-        const view = View.create(item);
-        view.dom()._item = item;
-        el.append(view.dom());
-        this.update();
-      })
-      .on('removeitem', (e) => {
-        el.children().each((node) => {
-          if (e.detail?.item === node._item) $(this).remove();
-        });
-        this.update();
+    this.on('additem', (e) => {
+      const item = e.detail?.item;
+      const view = View.create(item);
+      view.dom()._item = item;
+      el.append(view.dom());
+      this.validate();
+    }).on('removeitem', (e) => {
+      el.children().each((i, node) => {
+        if (e.detail?.item === node._item) $(node).remove();
       });
+      this.validate();
+    });
+
+    super.init();
   }
 
   public create() {
@@ -38,16 +40,16 @@ export class Cards extends Container {
   public select(id) {
     const item = this.getitem(id);
     if (item) this._selected = item;
-    return this.update();
+    return this.validate();
   }
 
-  public update() {
+  public validate() {
     if (!(this.items() as any[]).length) return this;
 
     const el = $(this.dom());
     const selected = this.selected() || this.getitem(0);
 
-    el.children().each((node) => {
+    el.children().each((i, node) => {
       const cel = $(node);
       const cview = node.view;
       const citem = node._item;

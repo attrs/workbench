@@ -6,6 +6,10 @@ export class BlockOptions extends ContainerOptions {}
 export class Block extends Container {
   constructor(options?: BlockOptions) {
     super(options);
+  }
+
+  public init() {
+    const options = this.options() as BlockOptions;
 
     this.on('additem', (e) => {
       const item = e.detail?.item;
@@ -13,12 +17,15 @@ export class Block extends Container {
       const view = View.create(item);
       view.dom()._item = item;
       $(this.dom()).append(view.dom(), index);
-    })
-    .on('removeitem', (e) => {
-      $(this.dom()).children().each((node) => {
-        if( e.detail?.item === node._item ) $(this).remove();
-      });
+    }).on('removeitem', (e) => {
+      $(this.dom())
+        .children()
+        .each((i, node) => {
+          if (e.detail?.item === node._item) $(node).remove();
+        });
     });
+
+    super.init();
   }
 
   public create() {

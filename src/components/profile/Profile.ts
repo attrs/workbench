@@ -11,7 +11,6 @@ export class ProfileOptions extends ViewOptions {
 export class Profile extends View {
   constructor(options: ProfileOptions) {
     super(options);
-    this.update();
   }
 
   public create() {
@@ -31,15 +30,17 @@ export class Profile extends View {
     )[0];
   }
 
-  public body() {
-    return this.dom().querySelector('.xw-profile-text') as DOMElement;
-  }
+  public init() {
+    super.init();
 
-  public update() {
     const o = this.options() as ProfileOptions;
     this.text(o.text);
     this.image(o.image);
     this.links(o.links);
+  }
+
+  public body() {
+    return this.dom().querySelector('.xw-profile-text') as DOMElement;
   }
 
   public text(text) {
@@ -73,13 +74,12 @@ export class Profile extends View {
 
     el.empty();
 
-    links &&
-      links.forEach((link) => {
-        if (typeof link === 'string') link = { text: link };
-        if (typeof link !== 'object') return;
+    links?.forEach((link) => {
+      if (typeof link === 'string') link = { text: link };
+      if (typeof link !== 'object') return;
 
-        el.append(new Anchor(link).dom());
-      });
+      el.append(new Anchor(link).dom());
+    });
 
     o.links = links;
     return this;

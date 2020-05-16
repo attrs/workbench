@@ -1,183 +1,176 @@
-var $ = require('tinyselector');
-var View = require('../view.js');
-var Container = require('../container.js');
+import $ from 'tinyselector';
+import { View, ContainerOptions, Container } from '../../base';
 
-function NavItem(options) {
-  View.apply(this, arguments);
+export class NavItemOptions extends ContainerOptions {
+  public text?: string;
+  public link?: string;
+  public badge?: string;
+  public target?: string;
 }
 
-var proto = NavItem.prototype = Object.create(Container.prototype);
+export class NavItem extends Container {
+  constructor(options: NavItemOptions) {
+    super(options);
+  }
 
-proto.create = function() {
-  return $('<li class="xw-navitem">\
-      <a href="javascript:;">\
-        <span class="xw-navitem-icon"></span>\
-        <span class="xw-navitem-text"></span>\
-        <div class="xw-navitem-acc">\
-          <span class="xw-navitem-badge"></span>\
-        </div>\
-      </a>\
-  </li>')[0];
-};
+  public create() {
+    return $(
+      '<li class="xw-navitem">\
+        <a href="javascript:;">\
+          <span class="xw-navitem-icon"></span>\
+          <span class="xw-navitem-text"></span>\
+          <div class="xw-navitem-acc">\
+            <span class="xw-navitem-badge"></span>\
+          </div>\
+        </a>\
+    </li>'
+    )[0];
+  }
 
-proto.init = function(o) {
-  var self = this;
-  var el = $(self.dom());
-  
-  self
-  .text(o.text)
-  .icon(o.icon)
-  .link(o.link)
-  .badge(o.badge)
-  .on('matchstate', function(e) {
-    self.select();
-  })
-  .on('options', function(e) {
-    self.text(e.detail.options.text);
-    self.icon(e.detail.options.icon);
-    self.link(e.detail.options.link);
-    self.badge(e.detail.options.badge);
-  })
-  .on('additem', function(e) {
-    var item = e.detail.item;
-    var index = e.detail.index;
-    var view = View.create(item, 'navitem');
-    var ul = el.children('ul');
-    view.dom()._item = item;
-    
-    if( !ul.length ) {
-      el.children('a').children('.xw-navitem-acc')
-      .append('<span class="xw-navitem-caret">');
-      
-      ul = el.append('<ul class="xw-navitem-items">').children('ul');
-    }
-    
-    ul.append(view.dom(), index);
-  })
-  .on('removeitem', function(e) {
-    ul.children().each(function() {
-      if( e.detail.item === this._item ) $(this).remove();
+  public init() {
+    const options = this.options() as NavItemOptions;
+    const el = $(this.dom());
+
+    this.text(options.text);
+    this.icon(options.icon);
+    this.link(options.link);
+    this.badge(options.badge);
+    this.on('matchstate', (e) => {
+      this.select();
+    })
+      .on('options', (e) => {
+        this.text(e.detail?.options.text);
+        this.icon(e.detail?.options.icon);
+        this.link(e.detail?.options.link);
+        this.badge(e.detail?.options.badge);
+      })
+      .on('additem', (e) => {
+        const item = e.detail?.item;
+        const index = e.detail?.index;
+        const view = View.create(item, 'navitem');
+        let ul = el.children('ul');
+        view.dom()._item = item;
+
+        if (!ul.length) {
+          el.children('a').children('.xw-navitem-acc').append('<span class="xw-navitem-caret">');
+          ul = el.append('<ul class="xw-navitem-items">').children('ul');
+        }
+
+        ul.append(view.dom(), index);
+      })
+      .on('removeitem', (e) => {
+        const ul = el.children('ul');
+        ul.children().each((i, node) => {
+          if (e.detail?.item === node._item) $(node).remove();
+        });
+      });
+
+    super.init();
+
+    el.children('a').on('click', (e) => {
+      this.toggle().select();
     });
-  });
-  
-  el.children('a')
-  .on('click', function(e) {
-    self.toggle().select();
-  });
-  
-  Container.prototype.init.apply(self, arguments);
-};
+  }
 
-proto.isexpand = function() {
-  return $(this.dom()).hc('xw-navitem-expand');
-};
+  public isexpand() {
+    return $(this.dom()).hc('xw-navitem-expand');
+  }
 
-proto.expand = function() {
-  $(this.dom()).ac('xw-navitem-expand');
-  return this;
-};
+  public expand() {
+    $(this.dom()).ac('xw-navitem-expand');
+    return this;
+  }
 
-proto.collapse = function() {
-  $(this.dom()).rc('xw-navitem-expand');
-  return this;
-};
+  public collapse() {
+    $(this.dom()).rc('xw-navitem-expand');
+    return this;
+  }
 
-proto.toggle = function() {
-  var self = this;
-  if( self.isexpand() ) self.collapse();
-  else self.expand();
-  return self;
-};
+  public toggle() {
+    if (this.isexpand()) this.collapse();
+    else this.expand();
+    return this;
+  }
 
-proto.text = function(text) {
-  var self = this;
-  var o = self.options();
-  var el = $(self.dom()).find('.xw-navitem-text');
-  if( !arguments.length ) return o.text;
-  el.html(text);
-  o.text = text;
-  return self;
-};
+  public text(text?: string) {
+    const o = this.options() as NavItemOptions;
+    const el = $(this.dom()).find('.xw-navitem-text');
+    if (!arguments.length) return o.text;
+    el.html(text);
+    o.text = text;
+    return this;
+  }
 
-proto.badge = function(badge) {
-  var self = this;
-  var o = self.options();
-  var el = $(self.dom()).find('.xw-navitem-badge');
-  if( !arguments.length ) return o.badge;
-  el.html(badge);
-  
-  if( badge ) el.css('opacity', 1);
-  else el.css('opacity', 0);
-  o.badge = badge;
-  return self;
-};
+  public badge(badge?: string) {
+    const o = this.options() as NavItemOptions;
+    const el = $(this.dom()).find('.xw-navitem-badge');
+    if (!arguments.length) return o.badge;
+    el.html(badge);
 
-proto.icon = function(icon) {
-  var self = this;
-  var o = self.options();
-  var el = $(self.dom()).find('.xw-navitem-icon');
-  if( !arguments.length ) return o.icon;
-  el.html(icon);
-  o.icon = icon;
-  return self;
-};
+    if (badge) el.css('opacity', 1);
+    else el.css('opacity', 0);
+    o.badge = badge;
+    return this;
+  }
 
-proto.link = function(link) {
-  var self = this;
-  var o = self.options();
-  var el = $(self.dom()).children('a');
-  if( !arguments.length ) return o.link;
-  el.attr('href', link || 'javascript:;');
-  o.link = link;
-  return self;
-};
+  public icon(icon?: string) {
+    const o = this.options() as NavItemOptions;
+    const el = $(this.dom()).find('.xw-navitem-icon');
+    if (!arguments.length) return o.icon;
+    el.html(icon);
+    o.icon = icon;
+    return this;
+  }
 
-proto.target = function(target) {
-  var self = this;
-  var o = self.options();
-  var el = $(self.dom()).children('a');
-  if( !arguments.length ) return o.target;
-  el.attr('target', target);
-  o.target = target;
-  return self;
-};
+  public link(link?: string) {
+    const o = this.options() as NavItemOptions;
+    const el = $(this.dom()).children('a');
+    if (!arguments.length) return o.link;
+    el.attr('href', link || 'javascript:;');
+    o.link = link;
+    return this;
+  }
 
-proto.isactive = function() {
-  return $(this.dom()).hc('xw-navitem-active');
-};
+  public target(target?: string) {
+    const o = this.options() as NavItemOptions;
+    const el = $(this.dom()).children('a');
+    if (!arguments.length) return o.target;
+    el.attr('target', target);
+    o.target = target;
+    return this;
+  }
 
-proto.active = function(b) {
-  var self = this;
-  var el = $(self.dom());
-  if( !arguments.length ) b = true;
-  if( b ) el.ac('xw-navitem-active');
-  else el.rc('xw-navitem-active');
-  return this;
-};
+  public isactive() {
+    return $(this.dom()).hc('xw-navitem-active');
+  }
 
-// with navigation
-proto.navigation = function() {
-  return $(this.dom()).parent(function() {
-    return this.view && $(this).hc('xw-navigation');
-  }).map(function(p) {
-    return p && p.view;
-  })[0];
-};
+  public active(b?: boolean) {
+    const el = $(this.dom());
+    if (!arguments.length) b = true;
+    if (b) el.ac('xw-navitem-active');
+    else el.rc('xw-navitem-active');
+    return this;
+  }
 
-proto.isselected = function() {
-  var self = this;
-  var navigation = self.navigation();
-  return ~navigation.selected().indexOf(self) ? true : false;
-};
+  // with navigation
+  public navigation() {
+    return $(this.dom())
+      .parent((node) => {
+        return node.view && $(node).hc('xw-navigation');
+      })
+      .map((p) => {
+        return p && p.view;
+      })[0];
+  }
 
-proto.select = function() {
-  var self = this;
-  var navigation = self.navigation();
-  if( navigation ) navigation.select(self);
-  return self;
-};
+  public isselected() {
+    const navigation = this.navigation();
+    return ~navigation.selected().indexOf(this) ? true : false;
+  }
 
-
-View.type('navitem', NavItem);
-module.exports = NavItem;
-
+  public select() {
+    const navigation = this.navigation();
+    if (navigation) navigation.select(this);
+    return this;
+  }
+}

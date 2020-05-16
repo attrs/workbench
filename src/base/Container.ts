@@ -1,14 +1,19 @@
-import { ViewOptions, View } from './View.js';
+import { ViewOptions, View } from './View';
 
 export class ContainerOptions extends ViewOptions {
   public items?: any[];
 }
 
 export class Container extends View {
-  private _items: any[] = [];
+  private _items?: any[];
 
   constructor(options?: ContainerOptions) {
     super(options);
+  }
+
+  public init() {
+    super.init();
+    const options = this.options() as ContainerOptions;
     options?.items && this.items(options.items);
   }
 
@@ -49,13 +54,13 @@ export class Container extends View {
     const items = this.items() as any[];
     if (typeof id === 'number') return items[id];
 
-    return items.filter((item) => {
+    return items.find((item) => {
       return item && (item.id === id || item === id);
-    })[0];
+    });
   }
 
   public items(items?: any[]): Container | any[] {
-    if (!arguments.length) return this._items;
+    if (!arguments.length) return (this._items = this._items || []);
     this._items = this._items || [];
     this.clearitems().additem(items);
     return this;

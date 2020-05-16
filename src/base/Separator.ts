@@ -1,3 +1,4 @@
+import $ from 'tinyselector';
 import { View, ViewOptions } from './View';
 
 export class Separator extends View {
