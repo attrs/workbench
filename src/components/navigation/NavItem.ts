@@ -87,8 +87,11 @@ export class NavItem extends Container {
   }
 
   public toggle() {
-    if (this.isexpand()) this.collapse();
-    else this.expand();
+    if (this.isexpand()) {
+      this.collapse();
+    } else {
+      this.expand();
+    }
     return this;
   }
 

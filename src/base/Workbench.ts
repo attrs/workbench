@@ -53,7 +53,7 @@ export class Workbench {
     return this._view;
   }
 
-  public find(selector) {
+  public find<T extends View>(selector): T {
     return this._view.find(selector);
   }
 

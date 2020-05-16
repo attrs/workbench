@@ -1,6 +1,6 @@
 .xw-navigation {
   margin: 20px 0;
-  font-size: 0.9em;
+  font-size: 0.93em;
   
   & .xw-navigation-title {
     padding-left: 15px;
@@ -23,7 +23,6 @@
     text-decoration: none;
   }
 }
-
 
 li.xw-navitem {
   position: relative;
@@ -120,9 +119,7 @@ li.xw-navitem {
   
   & > .xw-navitem-items {
     display: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -140,11 +137,8 @@ li.xw-navitem {
         }
       }
       
-      // 3 depth
-      & > ul.xw-navitem-items {
-        & li > a {
-          padding-left: 45px;
-        }
+      & > ul.xw-navitem-items li > a {
+        padding-left: 45px;
       }
     }
   }

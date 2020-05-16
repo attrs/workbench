@@ -58,6 +58,7 @@ export const dashboard = {
           {
             id: 'page',
             cls: 'xw-page',
+            flexbox: 'vertical',
             flex: 1
           }
         ]

@@ -133,16 +133,21 @@ export class Navigation extends Container {
         .query('[data-navigation-group="' + group + '"]')
         .forEach((element) => {
           const navigation = element.view as Navigation;
-          if (!view || view === this) return;
+          if (navigation === this) return;
           if (typeof navigation.deselect === 'function') {
             navigation.deselect();
-            if (navigation.autocollapse()) navigation.collapseall();
+            const ac = navigation.autocollapse();
+            navigation.findall(NavItem).forEach((navitem) => {
+              (navitem as NavItem).active(false);
+              if( ac ) (navitem as NavItem).collapse();
+            });
           }
         });
     }
 
     this.findall(NavItem).forEach((item) => {
       const navitem = item as NavItem;
+
       if (navitem === view) (navitem as NavItem).active();
       else if (navitem.dom().contains(view.dom())) navitem.expand().active();
       else if (autocollapse) navitem.collapse().active(false);

@@ -185,13 +185,14 @@ export class View {
     return parent && parent.view;
   }
 
-  public find(id: string | View | typeof View): View | null {
-    if (id instanceof View) return id;
+  public find<T extends View>(id: string | View | typeof View): T {
+    if (id instanceof View) return id as T;
     if (typeof id === 'string') {
       const node = this.dom().querySelector('#' + id + '.xw-view') as DOMElement;
-      return node?.view || null;
+      if( !node?.view ) throw new Error(`view "${id}" not found`);
+      return node.view as T;
     }
-    return this.findall(id)[0];
+    return this.findall(id)[0] as T;
   }
 
   public findall(id: string | View | typeof View): View[] {
