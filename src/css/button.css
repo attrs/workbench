@@ -4,7 +4,7 @@
   padding: 6px 14px;
   line-height: 1.42857143;
   margin: 5px 2px;
-  color: var(--xw-text-color);
+  -color: var(--xw-text-color);
   border: 1px solid  var(--xw-border-color);
   border-radius: 3px;
   text-align: center;

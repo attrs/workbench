@@ -2,6 +2,7 @@ export const dashboard = {
   target: 'page',
   view: {
     flexbox: 'vertical',
+    cls: 'xw-dark',
     flex: 1,
     items: [
       {

@@ -192,10 +192,10 @@ export class View {
       if( !node?.view ) throw new Error(`view "${id}" not found`);
       return node.view as T;
     }
-    return this.findall(id)[0] as T;
+    return this.findall<T>(id)[0];
   }
 
-  public findall(id: string | View | typeof View): View[] {
+  public findall<T extends View>(id: string | View | typeof View): T[] {
     const el = $(this.dom());
     let els;
     if (typeof id === 'string') els = el.find('#' + id + '.xw-view');

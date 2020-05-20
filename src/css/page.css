@@ -1,6 +1,5 @@
 .xw-page {
   position: relative;
-  background-color: var(--xw-page-bg);
   overflow: auto;
   
   & .xw-table-layout {
@@ -26,7 +25,6 @@
         width: 280px;
         max-width: 280px;
         order: 100;
-        background-color: var(--xw-page-bg);
         border-left: 1px solid var(--xw-border-color);
       }
       
@@ -34,7 +32,6 @@
         width: 280px;
         max-width: 280px;
         order: -100;
-        background-color: var(--xw-page-bg);
         border-right: 1px solid var(--xw-border-color);
       }
     }

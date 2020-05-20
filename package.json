@@ -9,10 +9,10 @@
   "scripts": {
     "prepublishOnly": "npm run dist",
     "dist": "rimraf lib && npm run dist:ts && npm run dist:css",
-    "dist:ts": "tsc -p tsconfig.json",
+    "dist:ts": "tsc",
     "dist:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css",
-    "watch": "rimraf lib && concurrently \"npm:watch:*\"",
-    "watch:ts": "tsc -p tsconfig.json -w",
+    "watch": "concurrently \"npm:watch:*\"",
+    "watch:ts": "tsc -w",
     "watch:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css -w",
     "format": "prettier --write \"src/**/*.ts\""
   },
