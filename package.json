@@ -3,6 +3,7 @@
   "version": "0.6.0",
   "description": "Extensible Workbench UI",
   "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
   "homepage": "https://attrs.github.io/workbench/",
   "repository": "attrs/workbench",
   "author": "joje <joje.attrs@gmail.com>",
@@ -12,7 +13,7 @@
     "dist:ts": "tsc",
     "dist:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css",
     "watch": "concurrently \"npm:watch:*\"",
-    "watch:ts": "tsc -w",
+    "watch:ts": "tsc -w --preserveWatchOutput",
     "watch:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css -w",
     "format": "prettier --write \"src/**/*.ts\""
   },

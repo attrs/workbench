@@ -31,7 +31,6 @@
       white-space: nowrap;
       word-wrap: normal;
       overflow: hidden;
-      font-size: 0.8em;
       
       & .xw-tab-item-icon {
         font-size: 1.6em;
@@ -76,12 +75,10 @@
       white-space: nowrap;
       word-wrap: normal;
       overflow: hidden;
-      font-size: 0.9em;
       line-height: 1em;
       padding: 12px 8px;
       
       & .xw-tab-item-icon {
-        font-size: 1em;
         line-height: 1em;
         display: inline-block;
         margin-right: 8px;

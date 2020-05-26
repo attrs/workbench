@@ -1,7 +1,6 @@
 .xw-profile {
   position: relative;
   margin: 15px;
-  font-size: 0.9em;
   margin-bottom: 35px;
   
   & .xw-profile-image {
@@ -35,7 +34,7 @@
         
         &:after {
           margin-left: 5px;
-          font-size: 0.8em;
+          font-size: 0.875em;
           opacity: .5;
           content: "∙"
         }

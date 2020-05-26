@@ -20,19 +20,6 @@
   display: flex;
   flex-flow: column;
 
-  &.xw-dark,
-  & .xw-dark {
-    background-color: var(--xw-bg-color-dark);
-    color: var(--xw-text-color-dark);
-
-    & a,
-    & a:hover,
-    & a:active,
-    & a:focus {
-      color: var(--xw-text-color-dark);
-    }
-  }
-
   & .xw-hidden {
     display: none !important;
   }
@@ -47,5 +34,17 @@
   & .xw-separator {
     height: 1px;
     background: var(--xw-border-color);
+  }
+}
+
+.xw-dark {
+  background-color: var(--xw-bg-color-dark);
+  color: var(--xw-text-color-dark);
+
+  & a,
+  & a:hover,
+  & a:active,
+  & a:focus {
+    /* color: var(--xw-text-color-dark); */
   }
 }

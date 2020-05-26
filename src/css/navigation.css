@@ -1,6 +1,5 @@
 .xw-navigation {
   margin: 20px 0;
-  font-size: 0.93em;
   
   & .xw-navigation-title {
     padding-left: 15px;
@@ -8,7 +7,6 @@
     text-transform: uppercase;
     color: inherit;
     font-weight: bold;
-    font-size: 0.9em;
     opacity: .65;
   }
     
@@ -60,7 +58,6 @@ li.xw-navitem {
     & > .xw-navitem-icon > i {
       display: inline-block;
       line-height: 1em;
-      font-size: 1em;
       color: var(--xw-text-color);
       width: 27px;
       text-align: center;
@@ -88,7 +85,7 @@ li.xw-navitem {
         display: inline-block;
         min-width: 10px;
         padding: 4px 7px 4px 7px;
-        font-size: 0.8em;
+        font-size: 0.875em;
         font-weight: bold;
         line-height: 1;
         text-align: center;
