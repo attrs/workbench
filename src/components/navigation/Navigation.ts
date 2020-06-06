@@ -16,9 +16,9 @@ export class Navigation extends Container {
   }
 
   public create() {
-    return $('<div class="xw-navigation">\
-      <div class="xw-navigation-title xw-hidden"></div>\
-      <ul class="xw-navigation-items"></ul>\
+    return $('<div class="x-navigation">\
+      <div class="x-navigation-title x-hidden"></div>\
+      <ul class="x-navigation-items"></ul>\
     </div>')[0];
   }
 
@@ -79,13 +79,13 @@ export class Navigation extends Container {
 
   public title(title?: string) {
     const o = this.options() as NavigationOptions;
-    const el = $(this.dom()).children('.xw-navigation-title');
+    const el = $(this.dom()).children('.x-navigation-title');
     if (!arguments.length) return o.title;
     el.html(title);
     o.title = title;
 
-    if (title) el.rc('xw-hidden');
-    else el.ac('xw-hidden');
+    if (title) el.rc('x-hidden');
+    else el.ac('x-hidden');
     return this;
   }
 

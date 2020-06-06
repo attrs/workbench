@@ -6,4 +6,5 @@ export * from './label';
 export * from './navigation';
 export * from './profile';
 export * from './tabbed';
-export * from './toolbar';
+export * from './navbar';
+export * from './dropdown';

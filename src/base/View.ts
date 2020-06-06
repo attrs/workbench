@@ -62,7 +62,7 @@ export class View {
   constructor(options?: ViewOptions) {
     const o = (this._options = options || {});
     const dom = (this._dom = this.create(o));
-    $(dom).attr('id', o.id).ac('xw-view');
+    $(dom).attr('id', o.id).ac('x-view x-noob');
     this.init();
     if (o.hidden) this.hide();
     this.on('options', (e) => {
@@ -94,7 +94,7 @@ export class View {
     if (o.state) this.state(o.state);
     if (typeof o.attrs === 'object') el.attrs(o.attrs);
     if (typeof o.attrs === 'function') el.attrs(o.attrs(this));
-    if (typeof o.state === 'string') el.ac('xw-state-responder');
+    if (typeof o.state === 'string') el.ac('x-state-responder');
     if (typeof o.html === 'string') this.html(o.html);
     if (typeof o.html === 'function') this.html(o.html(this));
 
@@ -132,12 +132,12 @@ export class View {
     const el = $(dom);
 
     if (!state) {
-      el.rc('xw-state-responder').attr('data-state', null);
+      el.rc('x-state-responder').attr('data-state', null);
       delete this._responder;
       return this;
     }
 
-    el.ac('xw-state-responder');
+    el.ac('x-state-responder');
     if (typeof state === 'string') {
       el.attr('data-state', state);
       this._responder = (o) => {
@@ -181,14 +181,14 @@ export class View {
 
     const node = nodes[0];
     if (node.view) return node.view;
-    const parent = $(node).parent('.xw-view')[0];
+    const parent = $(node).parent('.x-view')[0];
     return parent && parent.view;
   }
 
   public find<T extends View>(id: string | View | typeof View): T {
     if (id instanceof View) return id as T;
     if (typeof id === 'string') {
-      const node = this.dom().querySelector('#' + id + '.xw-view') as DOMElement;
+      const node = this.dom().querySelector('#' + id + '.x-view') as DOMElement;
       if( !node?.view ) throw new Error(`view "${id}" not found`);
       return node.view as T;
     }
@@ -198,8 +198,8 @@ export class View {
   public findall<T extends View>(id: string | View | typeof View): T[] {
     const el = $(this.dom());
     let els;
-    if (typeof id === 'string') els = el.find('#' + id + '.xw-view');
-    else els = el.find('.xw-view');
+    if (typeof id === 'string') els = el.find('#' + id + '.x-view');
+    else els = el.find('.x-view');
 
     return els
       .map((node) => {

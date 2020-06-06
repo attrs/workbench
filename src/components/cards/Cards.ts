@@ -30,7 +30,7 @@ export class Cards extends Container {
   }
 
   public create() {
-    return $('<div class="xw-cards"></div>')[0];
+    return $('<div class="x-stack"></div>')[0];
   }
 
   public selected() {

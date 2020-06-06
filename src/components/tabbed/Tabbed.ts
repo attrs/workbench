@@ -15,9 +15,9 @@ export class Tabbed extends Container {
   }
 
   public create() {
-    return $('<div class="xw-tab">\
-      <div class="xw-tab-body"></div>\
-      <div class="xw-tab-tabs"></div>\
+    return $('<div class="x-tab">\
+      <div class="x-tab-body"></div>\
+      <div class="x-tab-tabs"></div>\
     </div>')[0];
   }
 
@@ -48,29 +48,29 @@ export class Tabbed extends Container {
   }
 
   public oneline(b?: boolean): Tabbed | boolean {
-    if (!arguments.length) return $(this.dom()).hc('xw-tab-oneline');
-    $(this.dom()).tc('xw-tab-oneline', b);
+    if (!arguments.length) return $(this.dom()).hc('x-tab-oneline');
+    $(this.dom()).tc('x-tab-oneline', b);
     return this;
   }
 
   public icononly(b?: boolean): Tabbed | boolean {
-    if (!arguments.length) return $(this.dom()).hc('xw-tab-icon-only');
-    $(this.dom()).tc('xw-tab-icon-only', b);
+    if (!arguments.length) return $(this.dom()).hc('x-tab-icon-only');
+    $(this.dom()).tc('x-tab-icon-only', b);
     return this;
   }
 
   public titleonly(b?: boolean): Tabbed | boolean {
-    if (!arguments.length) return $(this.dom()).hc('xw-tab-title-only');
-    $(this.dom()).tc('xw-tab-title-only', b);
+    if (!arguments.length) return $(this.dom()).hc('x-tab-title-only');
+    $(this.dom()).tc('x-tab-title-only', b);
     return this;
   }
 
   public body(): DOMElement {
-    return $(this.dom()).find('.xw-tab-body')[0];
+    return $(this.dom()).find('.x-tab-body')[0];
   }
 
   public tabs(): DOMElement {
-    return $(this.dom()).find('.xw-tab-tabs')[0];
+    return $(this.dom()).find('.x-tab-tabs')[0];
   }
 
   public items(items: any[]): Tabbed | any[] {
@@ -91,9 +91,9 @@ export class Tabbed extends Container {
     const title = (view.options() as ViewOptions).title || 'Untitled';
     let icon = (view.options() as ViewOptions).icon || '<i class="fa fa-cube"></i>';
 
-    if (icon) icon = '<div class="xw-tab-item-icon">' + icon + '</div>';
+    if (icon) icon = '<div class="x-tab-item-icon">' + icon + '</div>';
 
-    const tabbtn = $('<div class="xw-tab-item">')
+    const tabbtn = $('<div class="x-tab-item">')
       .html(icon + title)
       .click((e) => {
         view.fire('tab', { originalEvent: e });
@@ -183,7 +183,7 @@ export class Tabbed extends Container {
       const seltab = $(tabs.children[index]);
 
       if (!selbody.hc('active')) {
-        $(this.dom()).find('.xw-tab-body > .active, .xw-tab-tabs > .active').rc('active');
+        $(this.dom()).find('.x-tab-body > .active, .x-tab-tabs > .active').rc('active');
         selbody.ac('active');
 
         const detail = { prev: this._selected, current: selected };

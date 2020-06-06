@@ -1,9 +1,0 @@
-.xw-cards {
-  & > * {
-    display: none;
-  }
-  
-  & > .active {
-    display: inherit;
-  }
-}

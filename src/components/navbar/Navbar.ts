@@ -1,15 +1,15 @@
 import $ from 'tinyselector';
 import { View, ContainerOptions, Container } from '../../base';
 
-export class ToolbarOptions extends ContainerOptions {}
+export class NavbarOptions extends ContainerOptions {}
 
-export class Toolbar extends Container {
-  constructor(options: ToolbarOptions) {
+export class Navbar extends Container {
+  constructor(options: NavbarOptions) {
     super(options);
   }
 
-  public create(options: ToolbarOptions) {
-    return $('<div class="xw-toolbar"></div>')[0];
+  public create(options: NavbarOptions) {
+    return $('<div class="x-navbar"></div>')[0];
   }
 
   public init() {

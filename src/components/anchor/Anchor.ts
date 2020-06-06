@@ -13,7 +13,7 @@ export class Anchor extends View {
   }
 
   public create() {
-    return $('<a href="javascript:;" class="xw-anchor">')[0];
+    return $('<a href="javascript:;" class="x-anchor">')[0];
   }
 
   public init() {

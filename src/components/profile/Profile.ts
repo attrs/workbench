@@ -15,14 +15,14 @@ export class Profile extends View {
 
   public create() {
     return $(
-      '<div class="xw-profile">\
-      <div class="xw-profile-image xw-hidden">\
-        <div class="xw-profile-image-body"></div>\
+      '<div class="x-profile">\
+      <div class="x-profile-image x-hidden">\
+        <div class="x-profile-image-body"></div>\
       </div>\
-      <div class="xw-profile-body">\
-        <div class="xw-profile-links">\
+      <div class="x-profile-body">\
+        <div class="x-profile-links">\
         </div>\
-        <div class="xw-profile-text">\
+        <div class="x-profile-text">\
           Text\
         </div>\
       </div>\
@@ -40,12 +40,12 @@ export class Profile extends View {
   }
 
   public body() {
-    return this.dom().querySelector('.xw-profile-text') as DOMElement;
+    return this.dom().querySelector('.x-profile-text') as DOMElement;
   }
 
   public text(text) {
     const o = this.options() as ProfileOptions;
-    const el = $(this.dom()).find('.xw-profile-text');
+    const el = $(this.dom()).find('.x-profile-text');
     if (!arguments.length) return o.text;
     el.html(text);
     o.text = text;
@@ -54,13 +54,13 @@ export class Profile extends View {
 
   public image(image) {
     const o = this.options() as ProfileOptions;
-    const el = $(this.dom()).children('.xw-profile-image');
+    const el = $(this.dom()).children('.x-profile-image');
     if (!arguments.length) return o.image;
 
-    el.children('.xw-profile-image-body').css('background-image', 'url(' + image + ')');
+    el.children('.x-profile-image-body').css('background-image', 'url(' + image + ')');
 
-    if (image) el.rc('xw-hidden');
-    else el.ac('xw-hidden');
+    if (image) el.rc('x-hidden');
+    else el.ac('x-hidden');
 
     o.image = image;
     return this;
@@ -68,7 +68,7 @@ export class Profile extends View {
 
   public links(links) {
     const o = this.options() as ProfileOptions;
-    const el = $(this.dom()).find('.xw-profile-links');
+    const el = $(this.dom()).find('.x-profile-links');
     if (!arguments.length) return o.links;
     if (links && !Array.isArray(links)) links = [links];
 

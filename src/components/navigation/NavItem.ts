@@ -14,35 +14,21 @@ export class NavItem extends Container {
   }
 
   public create() {
-    return $(
-      '<li class="xw-navitem">\
-        <a href="javascript:;">\
-          <span class="xw-navitem-icon"></span>\
-          <span class="xw-navitem-text"></span>\
-          <div class="xw-navitem-acc">\
-            <span class="xw-navitem-badge"></span>\
-          </div>\
+    return $('<li class="x-navitem">\
+        <a>\
+          <div class="tools"></div>\
         </a>\
-    </li>'
-    )[0];
+    </li>')[0];
   }
 
   public init() {
-    const options = this.options() as NavItemOptions;
     const el = $(this.dom());
 
-    this.text(options.text);
-    this.icon(options.icon);
-    this.link(options.link);
-    this.badge(options.badge);
     this.on('matchstate', (e) => {
       this.select();
     })
       .on('options', (e) => {
-        this.text(e.detail?.options.text);
-        this.icon(e.detail?.options.icon);
-        this.link(e.detail?.options.link);
-        this.badge(e.detail?.options.badge);
+        this.render();
       })
       .on('additem', (e) => {
         const item = e.detail?.item;
@@ -52,8 +38,8 @@ export class NavItem extends Container {
         view.dom()._item = item;
 
         if (!ul.length) {
-          el.children('a').children('.xw-navitem-acc').append('<span class="xw-navitem-caret">');
-          ul = el.append('<ul class="xw-navitem-items">').children('ul');
+          el.children('a').children('.tools').append('<span class="x-caret">');
+          ul = el.append('<ul class="x-navitem-items">').children('ul');
         }
 
         ul.append(view.dom(), index);
@@ -66,6 +52,7 @@ export class NavItem extends Container {
       });
 
     super.init();
+    this.render();
 
     el.children('a').on('click', (e) => {
       this.toggle().select();
@@ -73,16 +60,16 @@ export class NavItem extends Container {
   }
 
   public isexpand() {
-    return $(this.dom()).hc('xw-navitem-expand');
+    return $(this.dom()).hc('x-navitem-expand');
   }
 
   public expand() {
-    $(this.dom()).ac('xw-navitem-expand');
+    $(this.dom()).ac('x-navitem-expand');
     return this;
   }
 
   public collapse() {
-    $(this.dom()).rc('xw-navitem-expand');
+    $(this.dom()).rc('x-navitem-expand');
     return this;
   }
 
@@ -95,63 +82,15 @@ export class NavItem extends Container {
     return this;
   }
 
-  public text(text?: string) {
-    const o = this.options() as NavItemOptions;
-    const el = $(this.dom()).find('.xw-navitem-text');
-    if (!arguments.length) return o.text;
-    el.html(text);
-    o.text = text;
-    return this;
-  }
-
-  public badge(badge?: string) {
-    const o = this.options() as NavItemOptions;
-    const el = $(this.dom()).find('.xw-navitem-badge');
-    if (!arguments.length) return o.badge;
-    el.html(badge);
-
-    if (badge) el.css('opacity', 1);
-    else el.css('opacity', 0);
-    o.badge = badge;
-    return this;
-  }
-
-  public icon(icon?: string) {
-    const o = this.options() as NavItemOptions;
-    const el = $(this.dom()).find('.xw-navitem-icon');
-    if (!arguments.length) return o.icon;
-    el.html(icon);
-    o.icon = icon;
-    return this;
-  }
-
-  public link(link?: string) {
-    const o = this.options() as NavItemOptions;
-    const el = $(this.dom()).children('a');
-    if (!arguments.length) return o.link;
-    el.attr('href', link || 'javascript:;');
-    o.link = link;
-    return this;
-  }
-
-  public target(target?: string) {
-    const o = this.options() as NavItemOptions;
-    const el = $(this.dom()).children('a');
-    if (!arguments.length) return o.target;
-    el.attr('target', target);
-    o.target = target;
-    return this;
-  }
-
   public isactive() {
-    return $(this.dom()).hc('xw-navitem-active');
+    return $(this.dom()).hc('x-navitem-active');
   }
 
   public active(b?: boolean) {
     const el = $(this.dom());
     if (!arguments.length) b = true;
-    if (b) el.ac('xw-navitem-active');
-    else el.rc('xw-navitem-active');
+    if (b) el.ac('x-navitem-active');
+    else el.rc('x-navitem-active');
     return this;
   }
 
@@ -159,7 +98,7 @@ export class NavItem extends Container {
   public navigation() {
     return $(this.dom())
       .parent((node) => {
-        return node.view && $(node).hc('xw-navigation');
+        return node.view && $(node).hc('x-navigation');
       })
       .map((p) => {
         return p && p.view;
@@ -174,6 +113,61 @@ export class NavItem extends Container {
   public select() {
     const navigation = this.navigation();
     if (navigation) navigation.select(this);
+    return this;
+  }
+
+  public link(link?: string): NavItem | string | null {
+    const o = this.options() as NavItemOptions;
+    if (!arguments.length) return o.link || null;
+    o.link = link;
+    return this.render();
+  }
+
+  public target(target?: string): NavItem | string | null {
+    const o = this.options() as NavItemOptions;
+    if (!arguments.length) return o.target || null;
+    o.target = target;
+    return this.render();
+  }
+
+  public icon(icon?: string): NavItem | string | null {
+    const o = this.options() as NavItemOptions;
+    if (!arguments.length) return o.icon || null;
+    o.icon = icon;
+    return this.render();
+  }
+
+  public text(text?: string): NavItem | string | null {
+    const o = this.options() as NavItemOptions;
+    if (!arguments.length) return o.text || null;
+    o.text = text;
+    return this.render();
+  }
+
+  public badge(badge?: string): NavItem | string | null {
+    const o = this.options() as NavItemOptions;
+    if (!arguments.length) return o.badge || null;
+    o.badge = badge;
+    return this.render();
+  }
+
+  public render() {
+    const el = $(this.dom());
+    const anchor = el.children('a');
+    const tools = anchor.children('.tools');
+    const ul = el.children('ul');
+    const o = this.options() as NavItemOptions;
+
+    anchor.attr('href', o.link);
+    anchor.attr('target', o.target || null);
+    anchor.html(`${o.icon || ''} ${o.text || ''}`);
+
+    tools.html(`${(o.badge && '<span class="x-badge">' + o.badge + '</span>') || ''}`);
+
+    if (!ul.length) {
+      tools.append('<span class="x-caret">');
+    }
+
     return this;
   }
 }

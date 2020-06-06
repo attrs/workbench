@@ -29,6 +29,6 @@ export class Block extends Container {
   }
 
   public create() {
-    return $('<div class="xw-block"></div>')[0];
+    return $('<div></div>')[0];
   }
 }

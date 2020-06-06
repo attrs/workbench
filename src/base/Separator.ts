@@ -7,6 +7,6 @@ export class Separator extends View {
   }
 
   public create() {
-    return $('<div class="xw-separator" />')[0];
+    return $('<div class="x-separator" />')[0];
   }
 }

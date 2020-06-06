@@ -37,7 +37,7 @@ export class Workbench {
       this._view = View.create();
     }
 
-    this._dom = $('<div>').ac('xw').append(this._view.dom())[0];
+    this._dom = $('<div>').ac('x-workbench fullsize flex').append(this._view.dom())[0];
     this._dom.workbench = this;
   }
 

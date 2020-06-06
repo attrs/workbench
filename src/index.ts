@@ -1,7 +1,7 @@
-import './css/index.css';
+import '@attrs/style';
 import { Workbench, View, Separator } from './base';
 import { dashboard } from './presets';
-import { Block, Label, Navigation, NavItem, Tabbed, Cards, Profile, Anchor, Button, Toolbar } from './components';
+import { Block, Label, Navigation, NavItem, Tabbed, Cards, Profile, Anchor, Button, Navbar, Dropdown, ListItem } from './components';
 
 View.type('view', View);
 View.type('separator', Separator);
@@ -14,7 +14,9 @@ View.type('cards', Cards);
 View.type('profile', Profile);
 View.type('anchor', Anchor);
 View.type('button', Button);
-View.type('toolbar', Toolbar);
+View.type('navbar', Navbar);
+View.type('dropdown', Dropdown);
+View.type('listitem', ListItem);
 View.deftype(Block);
 Workbench.preset('dashboard', dashboard);
 

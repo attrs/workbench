@@ -9,6 +9,6 @@ export class Label extends View {
   }
 
   public create() {
-    return $('<div class="xw-label"></div>')[0];
+    return $('<div class="x-label"></div>')[0];
   }
 }

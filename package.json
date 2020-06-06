@@ -9,34 +9,21 @@
   "author": "joje <joje.attrs@gmail.com>",
   "scripts": {
     "prepublishOnly": "npm run dist",
-    "dist": "rimraf lib && npm run dist:ts && npm run dist:css",
-    "dist:ts": "tsc",
-    "dist:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css",
-    "watch": "concurrently \"npm:watch:*\"",
-    "watch:ts": "tsc -w --preserveWatchOutput",
-    "watch:css": "postcss -c postcss.config.js -o lib/css/index.css src/css/index.css -w",
+    "dist": "tsc",
+    "watch": "tsc -w --preserveWatchOutput",
     "format": "prettier --write \"src/**/*.ts\""
   },
   "license": "MIT",
   "dependencies": {
+    "@attrs/style": "^0.6.0",
     "array-equal": "^1.0.0",
     "minimatch": "^3.0.4",
     "tinyselector": "^0.1.24"
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
-    "@types/webpack-env": "^1.15.2",
-    "autoprefixer": "^9.7.6",
-    "concurrently": "^5.2.0",
-    "cpx": "^1.5.0",
-    "postcss-cli": "^7.1.1",
-    "postcss-color-mod-function": "^3.0.3",
-    "postcss-import": "^12.0.1",
-    "postcss-preset-env": "^6.7.0",
-    "postcss-url": "^8.0.0",
     "prettier": "^2.0.4",
     "rimraf": "^3.0.2",
-    "ts-node": "^7.0.1",
     "tslint": "^5.20.1",
     "typedoc": "^0.17.1",
     "typescript": "^3.8.3"
