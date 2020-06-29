@@ -7,7 +7,7 @@ export const dashboard = {
       {
         type: 'navbar',
         id: 'perspective',
-        cls: 'x-navbar-v bg-panel border-r',
+        cls: 'x-navbar-v bg-panel border-r'
       },
       {
         flexbox: 'vertical',

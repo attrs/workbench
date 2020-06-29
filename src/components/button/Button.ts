@@ -15,9 +15,7 @@ export class Button extends Container {
   }
 
   public create() {
-    return $(
-      '<a class="btn"></a>'
-    )[0];
+    return $('<a class="btn"></a>')[0];
   }
 
   public init() {
@@ -68,8 +66,8 @@ export class Button extends Container {
 
     btn.attr('href', o.link || 'javascript:;');
     btn.attr('target', o.target || null);
-    btn.html(`${o.icon || ''} ${o.text || ''} ${o.badge && '<span class="x-badge">' + o.badge + '</span>' || ''}`);
-    if( o.icon && !(o.text || o.badge) ) btn.ac('btn-icon');
+    btn.html(`${o.icon || ''} ${o.text || ''} ${(o.badge && '<span class="x-badge">' + o.badge + '</span>') || ''}`);
+    if (o.icon && !(o.text || o.badge)) btn.ac('btn-icon');
     else btn.rc('btn-icon');
     return this;
   }

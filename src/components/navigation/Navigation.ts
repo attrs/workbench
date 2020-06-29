@@ -139,7 +139,7 @@ export class Navigation extends Container {
             const ac = navigation.autocollapse();
             navigation.findall(NavItem).forEach((navitem) => {
               (navitem as NavItem).active(false);
-              if( ac ) (navitem as NavItem).collapse();
+              if (ac) (navitem as NavItem).collapse();
             });
           }
         });

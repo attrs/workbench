@@ -189,7 +189,7 @@ export class View {
     if (id instanceof View) return id as T;
     if (typeof id === 'string') {
       const node = this.dom().querySelector('#' + id + '.x-view') as DOMElement;
-      if( !node?.view ) throw new Error(`view "${id}" not found`);
+      if (!node?.view) throw new Error(`view "${id}" not found`);
       return node.view as T;
     }
     return this.findall<T>(id)[0];
